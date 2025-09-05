@@ -663,14 +663,47 @@ body {
 .cable-base {
   stroke-dasharray: 2500;
   stroke-dashoffset: 2500;
-  animation: cableDraw 4s ease-out forwards;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.cable-base.appearing {
+  opacity: 1;
+  animation: cableDraw 2s ease-out forwards;
+}
+
+.cable-base.success {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+.cable-base.fail {
+  opacity: 1;
+  animation: cableRetract 1.5s ease-in forwards;
 }
 
 /* Câbles réalistes - Ombre */
 .cable-shadow {
   stroke-dasharray: 2500;
   stroke-dashoffset: 2500;
-  animation: cableDraw 4s ease-out forwards;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.cable-shadow.appearing {
+  opacity: 1;
+  animation: cableDraw 2s ease-out forwards;
+  animation-delay: 0.1s;
+}
+
+.cable-shadow.success {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+.cable-shadow.fail {
+  opacity: 1;
+  animation: cableRetract 1.5s ease-in forwards;
   animation-delay: 0.1s;
 }
 
@@ -684,47 +717,32 @@ body {
 
 .cable-active.activated {
   opacity: 1;
-  animation: cableActivate 5s ease-out forwards;
+  animation: cableActivate 3s ease-out forwards;
 }
 
 /* Câbles réalistes - Reflets */
 .cable-reflect {
   stroke-dasharray: 2500;
   stroke-dashoffset: 2500;
-  animation: cableDraw 4s ease-out forwards;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.cable-reflect.appearing {
+  opacity: 1;
+  animation: cableDraw 2s ease-out forwards;
   animation-delay: 0.2s;
 }
 
-/* Connecteurs des câbles */
-.connector {
-  stroke-dasharray: 80;
-  stroke-dashoffset: 80;
-  animation: connectorAppear 1.5s ease-out forwards;
-  animation-delay: 3s;
+.cable-reflect.success {
+  opacity: 1;
+  stroke-dashoffset: 0;
 }
 
-.connector circle {
-  stroke-dasharray: 80;
-  stroke-dashoffset: 80;
-  animation: connectorAppear 1.5s ease-out forwards;
-  animation-delay: 3s;
-}
-
-@keyframes connectorAppear {
-  0% {
-    stroke-dashoffset: 80;
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.1);
-  }
-  100% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-    transform: scale(1);
-  }
+.cable-reflect.fail {
+  opacity: 1;
+  animation: cableRetract 1.5s ease-in forwards;
+  animation-delay: 0.2s;
 }
 
 @keyframes cableDraw {
@@ -744,6 +762,17 @@ body {
   100% {
     stroke-dashoffset: 0;
     opacity: 1;
+  }
+}
+
+@keyframes cableRetract {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 2500;
+    opacity: 0;
   }
 }
 
@@ -1434,25 +1463,30 @@ body {
   }
 }
 
-@media (max-width: 1024px) and (max-height: 768px) {
+/* ===== OPTIMISATION TABLETTE (768px - 1024px) ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
   .title-main {
-    font-size: 2rem;
-    letter-spacing: 3px;
+    font-size: 2.4rem;
+    letter-spacing: 4px;
   }
 
   .game-container {
-    height: calc(100vh - 15px);
-    margin-top: 50px;
+    height: calc(100vh - 30px);
+    margin-top: 60px;
+  }
+
+  .capsule-container {
+    top: 30px;
   }
 
   .capsule-frame {
-    width: 280px;
-    height: 220px;
+    width: 350px;
+    height: 280px;
   }
 
   .capsule-image {
-    width: 250px;
-    height: 190px;
+    width: 320px;
+    height: 250px;
   }
 
   .seven-segment {
@@ -1517,6 +1551,315 @@ body {
   .code-input {
     font-size: 0.9rem;
     padding: 8px 12px;
+  }
+
+  /* Optimisations spécifiques tablettes */
+  .seven-segment {
+    width: 40px;
+    height: 60px;
+  }
+
+  .segment {
+    stroke-width: 4;
+  }
+
+  .progress-container {
+    top: 380px;
+    width: 300px;
+  }
+
+  .progress-track {
+    height: 10px;
+  }
+
+  .progress-percentage {
+    font-size: 1.1rem;
+  }
+
+  .inputs-container {
+    bottom: 40px;
+    padding: 0 40px;
+    gap: 30px;
+  }
+
+  .input-frame {
+    min-width: 250px;
+    padding: 20px;
+  }
+
+  .input-label {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .code-input {
+    font-size: 1rem;
+    padding: 12px 16px;
+  }
+
+  .input-indicator {
+    width: 12px;
+    height: 12px;
+  }
+
+  .input-status {
+    font-size: 0.9rem;
+    margin-top: 8px;
+  }
+
+  /* Câbles optimisés pour tablettes */
+  .cables-system {
+    z-index: 25;
+  }
+
+  .cable-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Ajustement des trajectoires des câbles pour tablettes */
+  .cable-base,
+  .cable-shadow,
+  .cable-reflect,
+  .cable-active {
+    stroke-width: 14;
+  }
+
+  .cable-reflect {
+    stroke-width: 8;
+  }
+
+  /* Phase secrète optimisée */
+  .secret-phase-content {
+    max-width: 500px;
+    width: 90%;
+    padding: 30px;
+  }
+
+  .secret-phase-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .secret-input {
+    font-size: 1.3rem;
+    padding: 18px;
+  }
+}
+
+/* ===== TABLETTE PAYSAGE (1024px - 1366px) ===== */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  .title-main {
+    font-size: 2.6rem;
+    letter-spacing: 5px;
+  }
+
+  .game-container {
+    height: calc(100vh - 25px);
+    margin-top: 70px;
+  }
+
+  .capsule-container {
+    top: 25px;
+  }
+
+  .capsule-frame {
+    width: 380px;
+    height: 300px;
+  }
+
+  .capsule-image {
+    width: 350px;
+    height: 270px;
+  }
+
+  .seven-segment {
+    width: 45px;
+    height: 65px;
+  }
+
+  .segment {
+    stroke-width: 4.5;
+  }
+
+  .progress-container {
+    top: 400px;
+    width: 320px;
+  }
+
+  .progress-track {
+    height: 12px;
+  }
+
+  .progress-percentage {
+    font-size: 1.2rem;
+  }
+
+  .inputs-container {
+    bottom: 50px;
+    padding: 0 50px;
+    gap: 40px;
+  }
+
+  .input-frame {
+    min-width: 280px;
+    padding: 25px;
+  }
+
+  .input-label {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .code-input {
+    font-size: 1.1rem;
+    padding: 15px 20px;
+  }
+
+  .input-indicator {
+    width: 14px;
+    height: 14px;
+  }
+
+  .input-status {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .secret-phase-content {
+    max-width: 550px;
+    width: 85%;
+    padding: 35px;
+  }
+
+  .secret-phase-content h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+  }
+
+  .secret-input {
+    font-size: 1.4rem;
+    padding: 20px;
+  }
+
+  /* Câbles optimisés pour tablettes paysage */
+  .cable-base,
+  .cable-shadow,
+  .cable-reflect,
+  .cable-active {
+    stroke-width: 16;
+  }
+
+  .cable-reflect {
+    stroke-width: 10;
+  }
+}
+
+/* ===== TABLETTES IPAD SPÉCIFIQUES ===== */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+  .title-main {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+  }
+
+  .game-container {
+    height: calc(100vh - 35px);
+    margin-top: 65px;
+  }
+
+  .capsule-container {
+    top: 35px;
+  }
+
+  .capsule-frame {
+    width: 360px;
+    height: 290px;
+  }
+
+  .capsule-image {
+    width: 330px;
+    height: 260px;
+  }
+
+  .seven-segment {
+    width: 42px;
+    height: 62px;
+  }
+
+  .segment {
+    stroke-width: 4.2;
+  }
+
+  .progress-container {
+    top: 390px;
+    width: 310px;
+  }
+
+  .progress-track {
+    height: 11px;
+  }
+
+  .progress-percentage {
+    font-size: 1.15rem;
+  }
+
+  .inputs-container {
+    bottom: 45px;
+    padding: 0 45px;
+    gap: 35px;
+  }
+
+  .input-frame {
+    min-width: 265px;
+    padding: 22px;
+  }
+
+  .input-label {
+    font-size: 1.05rem;
+    margin-bottom: 13px;
+  }
+
+  .code-input {
+    font-size: 1.05rem;
+    padding: 13px 18px;
+  }
+
+  .input-indicator {
+    width: 13px;
+    height: 13px;
+  }
+
+  .input-status {
+    font-size: 0.95rem;
+    margin-top: 9px;
+  }
+
+  .secret-phase-content {
+    max-width: 525px;
+    width: 87%;
+    padding: 32px;
+  }
+
+  .secret-phase-content h2 {
+    font-size: 1.9rem;
+    margin-bottom: 22px;
+  }
+
+  .secret-input {
+    font-size: 1.35rem;
+    padding: 19px;
+  }
+
+  /* Câbles optimisés pour iPad */
+  .cable-base,
+  .cable-shadow,
+  .cable-reflect,
+  .cable-active {
+    stroke-width: 15;
+  }
+
+  .cable-reflect {
+    stroke-width: 9;
   }
 }
 

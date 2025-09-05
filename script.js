@@ -323,6 +323,20 @@ function validateInput(inputNumber) {
   indicator.classList.add("active");
   status.textContent = "TRAITEMENT...";
 
+  // Faire apparaître le câble (ou le faire remonter s'il était rétracté)
+  const cableBase = document.querySelector(`.cable-${inputNumber}-base`);
+  const cableShadow = document.querySelector(`.cable-${inputNumber}-shadow`);
+  const cableReflect = document.querySelector(`.cable-${inputNumber}-reflect`);
+
+  // Nettoyer les classes précédentes
+  cableBase.classList.remove("fail", "success");
+  cableShadow.classList.remove("fail", "success");
+  cableReflect.classList.remove("fail", "success");
+
+  cableBase.classList.add("appearing");
+  cableShadow.classList.add("appearing");
+  cableReflect.classList.add("appearing");
+
   cableActive.classList.add("activated");
 
   setTimeout(() => {
@@ -363,6 +377,18 @@ function wireSuccess(
   indicator.classList.add("success");
   status.textContent = "CODE VALIDE";
 
+  // Garder le câble affiché en cas de succès
+  const cableBase = document.querySelector(`.cable-${inputNumber}-base`);
+  const cableShadow = document.querySelector(`.cable-${inputNumber}-shadow`);
+  const cableReflect = document.querySelector(`.cable-${inputNumber}-reflect`);
+
+  cableBase.classList.remove("appearing");
+  cableBase.classList.add("success");
+  cableShadow.classList.remove("appearing");
+  cableShadow.classList.add("success");
+  cableReflect.classList.remove("appearing");
+  cableReflect.classList.add("success");
+
   cableActive.style.opacity = "1";
 
   updateProgress();
@@ -384,6 +410,25 @@ function wireFail(inputNumber, input, cableActive, message, indicator, status) {
   indicator.classList.remove("active");
   indicator.classList.add("fail");
   status.textContent = "CODE INVALIDE";
+
+  // Faire redescendre le câble en cas d'échec
+  const cableBase = document.querySelector(`.cable-${inputNumber}-base`);
+  const cableShadow = document.querySelector(`.cable-${inputNumber}-shadow`);
+  const cableReflect = document.querySelector(`.cable-${inputNumber}-reflect`);
+
+  cableBase.classList.remove("appearing");
+  cableBase.classList.add("fail");
+  cableShadow.classList.remove("appearing");
+  cableShadow.classList.add("fail");
+  cableReflect.classList.remove("appearing");
+  cableReflect.classList.add("fail");
+
+  // Après l'animation de rétraction, le câble disparaît complètement
+  setTimeout(() => {
+    cableBase.classList.remove("fail");
+    cableShadow.classList.remove("fail");
+    cableReflect.classList.remove("fail");
+  }, 1500);
 
   cableActive.style.opacity = "0";
 
@@ -462,6 +507,25 @@ function resetGame() {
   cable2Active.classList.remove("activated");
   cable1Active.style.opacity = "0";
   cable2Active.style.opacity = "0";
+
+  // Reset des câbles
+  const cable1Base = document.querySelector(".cable-1-base");
+  const cable1Shadow = document.querySelector(".cable-1-shadow");
+  const cable1Reflect = document.querySelector(".cable-1-reflect");
+
+  const cable2Base = document.querySelector(".cable-2-base");
+  const cable2Shadow = document.querySelector(".cable-2-shadow");
+  const cable2Reflect = document.querySelector(".cable-2-reflect");
+
+  // Reset câble 1
+  cable1Base.classList.remove("appearing", "success", "fail");
+  cable1Shadow.classList.remove("appearing", "success", "fail");
+  cable1Reflect.classList.remove("appearing", "success", "fail");
+
+  // Reset câble 2
+  cable2Base.classList.remove("appearing", "success", "fail");
+  cable2Shadow.classList.remove("appearing", "success", "fail");
+  cable2Reflect.classList.remove("appearing", "success", "fail");
 
   hideFloatingMessage(messageLeft);
   hideFloatingMessage(messageRight);
