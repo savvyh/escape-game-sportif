@@ -1,4 +1,4 @@
-let timeLeft = 2 * 60 * 60;
+let timeLeft = 1 * 60 * 60;
 let gameActive = true;
 let countdownInterval;
 let wireStates = [false, false];
@@ -475,7 +475,7 @@ function gameOver(success) {
 }
 
 function resetGame() {
-  timeLeft = 2 * 60 * 60;
+  timeLeft = 1 * 60 * 60;
   gameActive = true;
   wireStates = [false, false];
   progressValue = 0;
