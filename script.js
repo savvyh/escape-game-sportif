@@ -8,8 +8,6 @@ let secretPhaseActive = false;
 
 const input1 = document.getElementById("input1");
 const input2 = document.getElementById("input2");
-const wire1Active = document.getElementById("wire1Active");
-const wire2Active = document.getElementById("wire2Active");
 const messageLeft = document.getElementById("messageLeft");
 const messageRight = document.getElementById("messageRight");
 const progressBar = document.getElementById("progressBar");
@@ -118,19 +116,66 @@ function triggerSecretPhase() {
   }, 3000);
 }
 
-function handleSecretInput() {
-  if (!gameActive || !secretPhaseActive) return;
+let secretValidationTimeout;
+let secretProcessing = false;
+
+function debounceSecretValidation() {
+  if (!gameActive || !secretPhaseActive || secretProcessing) return;
+
+  clearTimeout(secretValidationTimeout);
+  secretValidationTimeout = setTimeout(() => validateSecretInput(), 1000);
+}
+
+function validateSecretInput() {
+  if (!gameActive || !secretPhaseActive || secretProcessing) return;
 
   const value = secretInput.value.toLowerCase().trim();
+  if (value === "") return;
 
-  if (value === secretWord) {
-    secretInput.classList.add("processing");
-    secretInput.disabled = true;
+  secretProcessing = true;
+  secretInput.classList.add("processing");
+  secretInput.disabled = true;
+
+  // Animation de la capsule pendant le traitement (comme les codes d'accès)
+  setTimeout(() => {
+    capsuleImage.style.animation = "none";
+    capsuleImage.offsetHeight;
+    capsuleImage.style.animation = "capsuleShake 1.5s ease-in-out";
 
     setTimeout(() => {
-      completeDefusingFinal();
-    }, 1000);
-  }
+      if (value === secretWord) {
+        // Mot correct - succès
+        secretInput.classList.remove("processing");
+        secretInput.classList.add("correct");
+        completeDefusingFinal();
+      } else {
+        // Mot faux - échec comme les codes d'accès
+        secretInput.classList.remove("processing");
+        secretInput.classList.add("fail");
+        secretInput.classList.add(
+          "animate__animated",
+          "animate__shakeX",
+          "animate__flash"
+        );
+
+        setTimeout(() => {
+          secretInput.value = "";
+          secretInput.disabled = false;
+          secretInput.classList.remove(
+            "fail",
+            "animate__animated",
+            "animate__shakeX",
+            "animate__flash"
+          );
+          secretProcessing = false;
+        }, 2000);
+      }
+    }, 1500);
+  }, 3000);
+}
+
+function handleSecretInput() {
+  debounceSecretValidation();
 }
 
 function completeDefusingFinal() {
@@ -263,7 +308,6 @@ function validateInput(inputNumber) {
   if (!gameActive || processingInput[inputNumber - 1]) return;
 
   const input = inputNumber === 1 ? input1 : input2;
-  const wireActive = inputNumber === 1 ? wire1Active : wire2Active;
   const message = inputNumber === 1 ? messageLeft : messageRight;
   const indicator = inputNumber === 1 ? input1Indicator : input2Indicator;
   const status = inputNumber === 1 ? input1Status : input2Status;
@@ -276,8 +320,6 @@ function validateInput(inputNumber) {
   indicator.classList.add("active");
   status.textContent = "TRAITEMENT...";
 
-  wireActive.classList.add("activated");
-
   setTimeout(() => {
     capsuleImage.style.animation = "none";
     capsuleImage.offsetHeight;
@@ -285,22 +327,15 @@ function validateInput(inputNumber) {
 
     setTimeout(() => {
       if (correctWords.includes(value)) {
-        wireSuccess(inputNumber, input, wireActive, message, indicator, status);
+        wireSuccess(inputNumber, input, message, indicator, status);
       } else {
-        wireFail(inputNumber, input, wireActive, message, indicator, status);
+        wireFail(inputNumber, input, message, indicator, status);
       }
     }, 1500);
   }, 3000);
 }
 
-function wireSuccess(
-  inputNumber,
-  input,
-  wireActive,
-  message,
-  indicator,
-  status
-) {
+function wireSuccess(inputNumber, input, message, indicator, status) {
   wireStates[inputNumber - 1] = true;
   input.classList.remove("processing");
   input.classList.add("correct");
@@ -308,8 +343,6 @@ function wireSuccess(
   indicator.classList.remove("active");
   indicator.classList.add("success");
   status.textContent = "CODE VALIDE";
-
-  wireActive.style.opacity = "1";
 
   updateProgress();
 
@@ -324,14 +357,12 @@ function wireSuccess(
   processingInput[inputNumber - 1] = false;
 }
 
-function wireFail(inputNumber, input, wireActive, message, indicator, status) {
+function wireFail(inputNumber, input, message, indicator, status) {
   input.classList.remove("processing");
   input.classList.add("fail");
   indicator.classList.remove("active");
   indicator.classList.add("fail");
   status.textContent = "CODE INVALIDE";
-
-  wireActive.style.opacity = "0";
 
   input.classList.add("animate__animated", "animate__shakeX", "animate__flash");
 
@@ -385,6 +416,8 @@ function resetGame() {
 
   clearTimeout(validationTimeout1);
   clearTimeout(validationTimeout2);
+  clearTimeout(secretValidationTimeout);
+  secretProcessing = false;
 
   input1.value = "";
   input2.value = "";
@@ -401,11 +434,6 @@ function resetGame() {
   secretInput.disabled = false;
   secretInput.className = "secret-input";
   secretPhase.classList.remove("show");
-
-  wire1Active.classList.remove("activated");
-  wire2Active.classList.remove("activated");
-  wire1Active.style.opacity = "0";
-  wire2Active.style.opacity = "0";
 
   hideFloatingMessage(messageLeft);
   hideFloatingMessage(messageRight);
