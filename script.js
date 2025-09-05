@@ -8,6 +8,8 @@ let secretPhaseActive = false;
 
 const input1 = document.getElementById("input1");
 const input2 = document.getElementById("input2");
+const cable1Active = document.getElementById("cable1Active");
+const cable2Active = document.getElementById("cable2Active");
 const messageLeft = document.getElementById("messageLeft");
 const messageRight = document.getElementById("messageRight");
 const progressBar = document.getElementById("progressBar");
@@ -308,6 +310,7 @@ function validateInput(inputNumber) {
   if (!gameActive || processingInput[inputNumber - 1]) return;
 
   const input = inputNumber === 1 ? input1 : input2;
+  const cableActive = inputNumber === 1 ? cable1Active : cable2Active;
   const message = inputNumber === 1 ? messageLeft : messageRight;
   const indicator = inputNumber === 1 ? input1Indicator : input2Indicator;
   const status = inputNumber === 1 ? input1Status : input2Status;
@@ -320,6 +323,8 @@ function validateInput(inputNumber) {
   indicator.classList.add("active");
   status.textContent = "TRAITEMENT...";
 
+  cableActive.classList.add("activated");
+
   setTimeout(() => {
     capsuleImage.style.animation = "none";
     capsuleImage.offsetHeight;
@@ -327,15 +332,29 @@ function validateInput(inputNumber) {
 
     setTimeout(() => {
       if (correctWords.includes(value)) {
-        wireSuccess(inputNumber, input, message, indicator, status);
+        wireSuccess(
+          inputNumber,
+          input,
+          cableActive,
+          message,
+          indicator,
+          status
+        );
       } else {
-        wireFail(inputNumber, input, message, indicator, status);
+        wireFail(inputNumber, input, cableActive, message, indicator, status);
       }
     }, 1500);
   }, 3000);
 }
 
-function wireSuccess(inputNumber, input, message, indicator, status) {
+function wireSuccess(
+  inputNumber,
+  input,
+  cableActive,
+  message,
+  indicator,
+  status
+) {
   wireStates[inputNumber - 1] = true;
   input.classList.remove("processing");
   input.classList.add("correct");
@@ -343,6 +362,8 @@ function wireSuccess(inputNumber, input, message, indicator, status) {
   indicator.classList.remove("active");
   indicator.classList.add("success");
   status.textContent = "CODE VALIDE";
+
+  cableActive.style.opacity = "1";
 
   updateProgress();
 
@@ -357,12 +378,14 @@ function wireSuccess(inputNumber, input, message, indicator, status) {
   processingInput[inputNumber - 1] = false;
 }
 
-function wireFail(inputNumber, input, message, indicator, status) {
+function wireFail(inputNumber, input, cableActive, message, indicator, status) {
   input.classList.remove("processing");
   input.classList.add("fail");
   indicator.classList.remove("active");
   indicator.classList.add("fail");
   status.textContent = "CODE INVALIDE";
+
+  cableActive.style.opacity = "0";
 
   input.classList.add("animate__animated", "animate__shakeX", "animate__flash");
 
@@ -434,6 +457,11 @@ function resetGame() {
   secretInput.disabled = false;
   secretInput.className = "secret-input";
   secretPhase.classList.remove("show");
+
+  cable1Active.classList.remove("activated");
+  cable2Active.classList.remove("activated");
+  cable1Active.style.opacity = "0";
+  cable2Active.style.opacity = "0";
 
   hideFloatingMessage(messageLeft);
   hideFloatingMessage(messageRight);

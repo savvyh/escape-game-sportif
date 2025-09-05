@@ -105,6 +105,559 @@
         </div>
       </div>
 
+      <!-- Système de câbles électriques réalistes -->
+      <div class="cables-system">
+        <!-- Câble 1 - Rouge (Station 1 vers Capsule) -->
+        <div class="cable-container cable-1">
+          <svg class="cable-svg" viewBox="0 0 1200 800">
+            <defs>
+              <!-- Gradient pour le câble rouge réaliste -->
+              <linearGradient
+                id="cableGradient1"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #8b0000; stop-opacity: 1"
+                />
+                <stop
+                  offset="20%"
+                  style="stop-color: #dc143c; stop-opacity: 1"
+                />
+                <stop
+                  offset="50%"
+                  style="stop-color: #ff0000; stop-opacity: 1"
+                />
+                <stop
+                  offset="80%"
+                  style="stop-color: #dc143c; stop-opacity: 1"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #8b0000; stop-opacity: 1"
+                />
+              </linearGradient>
+
+              <!-- Gradient pour l'ombre du câble -->
+              <linearGradient
+                id="cableShadow1"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #000000; stop-opacity: 0.6"
+                />
+                <stop
+                  offset="50%"
+                  style="stop-color: #000000; stop-opacity: 0.3"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #000000; stop-opacity: 0.6"
+                />
+              </linearGradient>
+
+              <!-- Filtre de brillance pour le câble -->
+              <filter id="cableGlow1">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+
+              <!-- Filtre d'ombre portée -->
+              <filter id="cableShadowFilter1">
+                <feDropShadow
+                  dx="3"
+                  dy="3"
+                  stdDeviation="4"
+                  flood-color="#000000"
+                  flood-opacity="0.4"
+                />
+              </filter>
+
+              <!-- Pattern de texture pour le câble -->
+              <pattern
+                id="cableTexture1"
+                x="0"
+                y="0"
+                width="8"
+                height="8"
+                patternUnits="userSpaceOnUse"
+              >
+                <rect
+                  width="8"
+                  height="8"
+                  fill="url(#cableGradient1)"
+                  opacity="0.95"
+                />
+                <!-- Stries fines pour texture réaliste -->
+                <line
+                  x1="0"
+                  y1="1"
+                  x2="8"
+                  y2="1"
+                  stroke="#FF6666"
+                  stroke-width="0.2"
+                  opacity="0.6"
+                />
+                <line
+                  x1="0"
+                  y1="2.5"
+                  x2="8"
+                  y2="2.5"
+                  stroke="#FF4444"
+                  stroke-width="0.15"
+                  opacity="0.4"
+                />
+                <line
+                  x1="0"
+                  y1="4"
+                  x2="8"
+                  y2="4"
+                  stroke="#FF6666"
+                  stroke-width="0.2"
+                  opacity="0.6"
+                />
+                <line
+                  x1="0"
+                  y1="5.5"
+                  x2="8"
+                  y2="5.5"
+                  stroke="#FF4444"
+                  stroke-width="0.15"
+                  opacity="0.4"
+                />
+                <line
+                  x1="0"
+                  y1="7"
+                  x2="8"
+                  y2="7"
+                  stroke="#FF6666"
+                  stroke-width="0.2"
+                  opacity="0.6"
+                />
+                <!-- Reflets métalliques -->
+                <line
+                  x1="0"
+                  y1="0.5"
+                  x2="8"
+                  y2="0.5"
+                  stroke="#FFFFFF"
+                  stroke-width="0.1"
+                  opacity="0.3"
+                />
+                <line
+                  x1="0"
+                  y1="3.5"
+                  x2="8"
+                  y2="3.5"
+                  stroke="#FFFFFF"
+                  stroke-width="0.1"
+                  opacity="0.2"
+                />
+                <line
+                  x1="0"
+                  y1="6.5"
+                  x2="8"
+                  y2="6.5"
+                  stroke="#FFFFFF"
+                  stroke-width="0.1"
+                  opacity="0.3"
+                />
+              </pattern>
+
+              <!-- Gradient de reflet métallique -->
+              <linearGradient
+                id="cableReflect1"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #ffffff; stop-opacity: 0.1"
+                />
+                <stop
+                  offset="20%"
+                  style="stop-color: #ffffff; stop-opacity: 0.5"
+                />
+                <stop
+                  offset="40%"
+                  style="stop-color: #ffffff; stop-opacity: 0.3"
+                />
+                <stop
+                  offset="60%"
+                  style="stop-color: #ffffff; stop-opacity: 0.4"
+                />
+                <stop
+                  offset="80%"
+                  style="stop-color: #ffffff; stop-opacity: 0.2"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #ffffff; stop-opacity: 0.1"
+                />
+              </linearGradient>
+            </defs>
+
+            <!-- Ombre du câble -->
+            <path
+              class="cable-shadow cable-1-shadow"
+              d="M 150 750 Q 150 650 150 550 Q 150 450 150 350 Q 150 250 180 200 Q 220 150 280 130 Q 350 120 420 140 Q 500 160 580 180 Q 620 190 650 200"
+              stroke="url(#cableShadow1)"
+              stroke-width="14"
+              fill="none"
+              filter="url(#cableShadowFilter1)"
+            />
+
+            <!-- Câble principal avec texture -->
+            <path
+              class="cable-base cable-1-base"
+              d="M 150 750 Q 150 650 150 550 Q 150 450 150 350 Q 150 250 180 200 Q 220 150 280 130 Q 350 120 420 140 Q 500 160 580 180 Q 620 190 650 200"
+              stroke="url(#cableTexture1)"
+              stroke-width="12"
+              fill="none"
+              filter="url(#cableGlow1)"
+            />
+
+            <!-- Reflet métallique du câble -->
+            <path
+              class="cable-reflect cable-1-reflect"
+              d="M 150 750 Q 150 650 150 550 Q 150 450 150 350 Q 150 250 180 200 Q 220 150 280 130 Q 350 120 420 140 Q 500 160 580 180 Q 620 190 650 200"
+              stroke="url(#cableReflect1)"
+              stroke-width="6"
+              fill="none"
+              opacity="0.8"
+            />
+
+            <!-- Câble actif (s'illumine quand activé) -->
+            <path
+              class="cable-active cable-1-active"
+              id="cable1Active"
+              d="M 150 750 Q 150 650 150 550 Q 150 450 150 350 Q 150 250 180 200 Q 220 150 280 130 Q 350 120 420 140 Q 500 160 580 180 Q 620 190 650 200"
+              stroke="#FF4444"
+              stroke-width="10"
+              fill="none"
+              opacity="0"
+            />
+
+            <!-- Connecteur métallique à la station 1 (début du câble) -->
+            <g class="connector connector-1-start">
+              <circle
+                cx="150"
+                cy="750"
+                r="12"
+                fill="#2a2a2a"
+                stroke="#FF0000"
+                stroke-width="3"
+                filter="url(#cableGlow1)"
+              />
+              <circle cx="150" cy="750" r="8" fill="#FF4444" opacity="0.9" />
+              <circle cx="150" cy="750" r="4" fill="#ffffff" opacity="0.6" />
+            </g>
+
+            <!-- Connecteur métallique à la capsule (fin du câble) -->
+            <g class="connector connector-1-end">
+              <circle
+                cx="650"
+                cy="200"
+                r="12"
+                fill="#2a2a2a"
+                stroke="#FF0000"
+                stroke-width="3"
+                filter="url(#cableGlow1)"
+              />
+              <circle cx="650" cy="200" r="8" fill="#FF4444" opacity="0.9" />
+              <circle cx="650" cy="200" r="4" fill="#ffffff" opacity="0.6" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- Câble 2 - Bleu (Station 2 vers Capsule) -->
+        <div class="cable-container cable-2">
+          <svg class="cable-svg" viewBox="0 0 1200 800">
+            <defs>
+              <!-- Gradient pour le câble bleu réaliste -->
+              <linearGradient
+                id="cableGradient2"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #000080; stop-opacity: 1"
+                />
+                <stop
+                  offset="20%"
+                  style="stop-color: #0066cc; stop-opacity: 1"
+                />
+                <stop
+                  offset="50%"
+                  style="stop-color: #0066ff; stop-opacity: 1"
+                />
+                <stop
+                  offset="80%"
+                  style="stop-color: #0066cc; stop-opacity: 1"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #000080; stop-opacity: 1"
+                />
+              </linearGradient>
+
+              <!-- Gradient pour l'ombre du câble -->
+              <linearGradient
+                id="cableShadow2"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #000000; stop-opacity: 0.6"
+                />
+                <stop
+                  offset="50%"
+                  style="stop-color: #000000; stop-opacity: 0.3"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #000000; stop-opacity: 0.6"
+                />
+              </linearGradient>
+
+              <!-- Filtre de brillance pour le câble -->
+              <filter id="cableGlow2">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+
+              <!-- Filtre d'ombre portée -->
+              <filter id="cableShadowFilter2">
+                <feDropShadow
+                  dx="3"
+                  dy="3"
+                  stdDeviation="4"
+                  flood-color="#000000"
+                  flood-opacity="0.4"
+                />
+              </filter>
+
+              <!-- Pattern de texture pour le câble -->
+              <pattern
+                id="cableTexture2"
+                x="0"
+                y="0"
+                width="8"
+                height="8"
+                patternUnits="userSpaceOnUse"
+              >
+                <rect
+                  width="8"
+                  height="8"
+                  fill="url(#cableGradient2)"
+                  opacity="0.95"
+                />
+                <!-- Stries fines pour texture réaliste -->
+                <line
+                  x1="0"
+                  y1="1"
+                  x2="8"
+                  y2="1"
+                  stroke="#6699FF"
+                  stroke-width="0.2"
+                  opacity="0.6"
+                />
+                <line
+                  x1="0"
+                  y1="2.5"
+                  x2="8"
+                  y2="2.5"
+                  stroke="#4488FF"
+                  stroke-width="0.15"
+                  opacity="0.4"
+                />
+                <line
+                  x1="0"
+                  y1="4"
+                  x2="8"
+                  y2="4"
+                  stroke="#6699FF"
+                  stroke-width="0.2"
+                  opacity="0.6"
+                />
+                <line
+                  x1="0"
+                  y1="5.5"
+                  x2="8"
+                  y2="5.5"
+                  stroke="#4488FF"
+                  stroke-width="0.15"
+                  opacity="0.4"
+                />
+                <line
+                  x1="0"
+                  y1="7"
+                  x2="8"
+                  y2="7"
+                  stroke="#6699FF"
+                  stroke-width="0.2"
+                  opacity="0.6"
+                />
+                <!-- Reflets métalliques -->
+                <line
+                  x1="0"
+                  y1="0.5"
+                  x2="8"
+                  y2="0.5"
+                  stroke="#FFFFFF"
+                  stroke-width="0.1"
+                  opacity="0.3"
+                />
+                <line
+                  x1="0"
+                  y1="3.5"
+                  x2="8"
+                  y2="3.5"
+                  stroke="#FFFFFF"
+                  stroke-width="0.1"
+                  opacity="0.2"
+                />
+                <line
+                  x1="0"
+                  y1="6.5"
+                  x2="8"
+                  y2="6.5"
+                  stroke="#FFFFFF"
+                  stroke-width="0.1"
+                  opacity="0.3"
+                />
+              </pattern>
+
+              <!-- Gradient de reflet métallique -->
+              <linearGradient
+                id="cableReflect2"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #ffffff; stop-opacity: 0.1"
+                />
+                <stop
+                  offset="20%"
+                  style="stop-color: #ffffff; stop-opacity: 0.5"
+                />
+                <stop
+                  offset="40%"
+                  style="stop-color: #ffffff; stop-opacity: 0.3"
+                />
+                <stop
+                  offset="60%"
+                  style="stop-color: #ffffff; stop-opacity: 0.4"
+                />
+                <stop
+                  offset="80%"
+                  style="stop-color: #ffffff; stop-opacity: 0.2"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #ffffff; stop-opacity: 0.1"
+                />
+              </linearGradient>
+            </defs>
+
+            <!-- Ombre du câble -->
+            <path
+              class="cable-shadow cable-2-shadow"
+              d="M 1050 750 Q 1050 650 1050 550 Q 1050 450 1050 350 Q 1050 250 1020 200 Q 980 150 920 130 Q 850 120 780 140 Q 700 160 620 180 Q 580 190 550 200"
+              stroke="url(#cableShadow2)"
+              stroke-width="14"
+              fill="none"
+              filter="url(#cableShadowFilter2)"
+            />
+
+            <!-- Câble principal avec texture -->
+            <path
+              class="cable-base cable-2-base"
+              d="M 1050 750 Q 1050 650 1050 550 Q 1050 450 1050 350 Q 1050 250 1020 200 Q 980 150 920 130 Q 850 120 780 140 Q 700 160 620 180 Q 580 190 550 200"
+              stroke="url(#cableTexture2)"
+              stroke-width="12"
+              fill="none"
+              filter="url(#cableGlow2)"
+            />
+
+            <!-- Reflet métallique du câble -->
+            <path
+              class="cable-reflect cable-2-reflect"
+              d="M 1050 750 Q 1050 650 1050 550 Q 1050 450 1050 350 Q 1050 250 1020 200 Q 980 150 920 130 Q 850 120 780 140 Q 700 160 620 180 Q 580 190 550 200"
+              stroke="url(#cableReflect2)"
+              stroke-width="6"
+              fill="none"
+              opacity="0.8"
+            />
+
+            <!-- Câble actif (s'illumine quand activé) -->
+            <path
+              class="cable-active cable-2-active"
+              id="cable2Active"
+              d="M 1050 750 Q 1050 650 1050 550 Q 1050 450 1050 350 Q 1050 250 1020 200 Q 980 150 920 130 Q 850 120 780 140 Q 700 160 620 180 Q 580 190 550 200"
+              stroke="#4488FF"
+              stroke-width="10"
+              fill="none"
+              opacity="0"
+            />
+
+            <!-- Connecteur métallique à la station 2 (début du câble) -->
+            <g class="connector connector-2-start">
+              <circle
+                cx="1050"
+                cy="750"
+                r="12"
+                fill="#2a2a2a"
+                stroke="#0066FF"
+                stroke-width="3"
+                filter="url(#cableGlow2)"
+              />
+              <circle cx="1050" cy="750" r="8" fill="#4488FF" opacity="0.9" />
+              <circle cx="1050" cy="750" r="4" fill="#ffffff" opacity="0.6" />
+            </g>
+
+            <!-- Connecteur métallique à la capsule (fin du câble) -->
+            <g class="connector connector-2-end">
+              <circle
+                cx="550"
+                cy="200"
+                r="12"
+                fill="#2a2a2a"
+                stroke="#0066FF"
+                stroke-width="3"
+                filter="url(#cableGlow2)"
+              />
+              <circle cx="550" cy="200" r="8" fill="#4488FF" opacity="0.9" />
+              <circle cx="550" cy="200" r="4" fill="#ffffff" opacity="0.6" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
       <div class="progress-container">
         <div class="progress-track">
           <div class="progress-bar" id="progressBar">
