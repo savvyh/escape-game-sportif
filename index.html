@@ -4,30 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ÉQUIPE EN MISSION</title>
-    <!-- Animate.css pour les animations -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-    <!-- Google Fonts pour un style plus moderne -->
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Styles CSS -->
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- Effet de particules de fond -->
     <div class="particles-background" id="particlesBackground"></div>
-
-    <!-- Titre principal avec effet holographique -->
     <div class="title-container">
       <h1 class="title-main">MISSION : DÉSAMORÇER LA BOMBE</h1>
       <div class="title-glow"></div>
     </div>
 
-    <!-- Compte à rebours dramatique avec affichage 7 segments -->
     <div class="countdown-container">
       <div class="countdown-frame">
         <div class="countdown-label">TEMPS RESTANT</div>
@@ -95,13 +88,11 @@
       </div>
     </div>
 
-    <!-- Container principal du jeu -->
     <div class="game-container">
-      <!-- Capsule centrale avec l'image réelle -->
       <div class="capsule-container">
         <div class="capsule-frame">
           <img
-            src="capsule-factice.png"
+            src="./assets/capsule-factice.png"
             alt="Capsule à désamorcer"
             class="capsule-image"
             id="capsuleImage"
@@ -114,9 +105,7 @@
         </div>
       </div>
 
-      <!-- Système de fils connectés à la capsule -->
       <div class="wires-system">
-        <!-- Fil 1 - Rouge -->
         <div class="wire-container wire-1">
           <svg class="wire-svg" viewBox="0 0 400 300">
             <defs>
@@ -167,7 +156,6 @@
           </svg>
         </div>
 
-        <!-- Fil 2 - Bleu -->
         <div class="wire-container wire-2">
           <svg class="wire-svg" viewBox="0 0 400 300">
             <defs>
@@ -219,19 +207,15 @@
         </div>
       </div>
 
-      <!-- Jauge de progression améliorée -->
       <div class="progress-container">
-        <div class="progress-frame">
-          <div class="progress-label" id="progressLabel">PROGRESSION: 0%</div>
-          <div class="progress-track">
-            <div class="progress-bar" id="progressBar">
-              <div class="progress-shine"></div>
-            </div>
+        <div class="progress-track">
+          <div class="progress-bar" id="progressBar">
+            <div class="progress-shine"></div>
           </div>
         </div>
+        <div class="progress-percentage" id="progressPercentage">0%</div>
       </div>
 
-      <!-- Zone de saisie des codes -->
       <div class="inputs-container">
         <div class="input-station input-1">
           <div class="input-frame">
@@ -268,7 +252,6 @@
         </div>
       </div>
 
-      <!-- Messages flottants améliorés -->
       <div class="floating-message message-1" id="messageLeft">
         <div class="message-content">
           <div class="message-icon"></div>
@@ -283,48 +266,42 @@
       </div>
     </div>
 
-    <!-- Overlay pour l'animation finale -->
     <div class="final-zoom-overlay" id="finalOverlay">
       <div class="bomb-final" id="bombFinal">
         <img
-          src="capsule-factice.png"
+          src="./assets/capsule-factice.png"
           alt="Capsule désamorcée"
           class="capsule-final-image"
           id="capsuleFinalImage"
         />
         <div class="success-particles" id="particles"></div>
-        <!-- Fond sombre pour le texte -->
         <div class="victory-overlay" id="victoryOverlay"></div>
       </div>
-      <!-- Message de victoire -->
       <div class="victory-message" id="victoryMessage">
         <h1 class="victory-title">🎉 MISSION ACCOMPLIE ! 🎉</h1>
-        <p class="victory-subtitle">
-          La capsule a été désamorcée avec succès !
+      </div>
+    </div>
+
+    <div class="secret-phase" id="secretPhase">
+      <div class="secret-phase-content">
+        <h2>ÉPREUVE SECRÈTE<br />DÉTECTÉE 🔒</h2>
+        <p>
+          Les codes sont validés mais la capsule reste active!<br />
+          Un dernier mot secret doit être découvert ensemble...
+        </p>
+        <input
+          type="text"
+          class="secret-input"
+          id="secretInput"
+          placeholder="MOT SECRET"
+          maxlength="20"
+        />
+        <p class="mystery-text">
+          💡 Cherchez l'indice dans la nature qui vous entoure...
         </p>
       </div>
     </div>
 
-    <!-- Étape secrète -->
-    <div class="secret-phase" id="secretPhase">
-      <h2>🔒 ÉTAPE SECRÈTE DÉTECTÉE 🔒</h2>
-      <p>
-        Les codes sont validés mais la capsule reste active !<br />
-        Un dernier mot secret doit être découvert ensemble...
-      </p>
-      <input
-        type="text"
-        class="secret-input"
-        id="secretInput"
-        placeholder="MOT SECRET"
-        maxlength="20"
-      />
-      <p class="mystery-text">
-        💡 Cherchez l'indice dans la nature qui vous entoure...
-      </p>
-    </div>
-
-    <!-- Script JavaScript -->
     <script src="script.js"></script>
   </body>
 </html>
