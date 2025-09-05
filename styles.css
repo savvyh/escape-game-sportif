@@ -362,7 +362,6 @@ body {
   margin-top: 5px;
 }
 
-/* ===== CONTAINER PRINCIPAL ===== */
 .game-container {
   position: relative;
   width: 100%;
@@ -409,7 +408,6 @@ body {
   }
 }
 
-/* ===== CAPSULE CENTRALE ===== */
 .capsule-container {
   position: absolute;
   top: 20px;
@@ -1245,7 +1243,6 @@ body {
   }
 }
 
-/* Animation de l'image de la capsule lors de la désactivation */
 .bomb-final.deactivating .capsule-final-image {
   animation: capsuleDeactivation 3s ease-in-out forwards;
 }
@@ -1307,7 +1304,6 @@ body {
   transform: scale(1.1);
 }
 
-/* ===== FOND SOMBRE POUR LE TEXTE ===== */
 .victory-overlay {
   position: absolute;
   top: 0;
@@ -1320,7 +1316,6 @@ body {
   border-radius: 15px;
 }
 
-/* ===== MESSAGE DE VICTOIRE ===== */
 .victory-message {
   position: absolute;
   top: 50%;
@@ -1696,7 +1691,6 @@ body {
   }
 }
 
-/* Mode paysage pour tablettes */
 @media (max-height: 600px) and (orientation: landscape) {
   .title-container {
     top: 5px;
