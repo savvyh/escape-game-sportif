@@ -1863,6 +1863,114 @@ body {
   }
 }
 
+/* ===== TABLETTE 1280x800 SPÉCIFIQUE ===== */
+@media (min-width: 1280px) and (max-width: 1280px) and (min-height: 800px) and (max-height: 800px) {
+  .title-main {
+    font-size: 2.7rem;
+    letter-spacing: 5px;
+  }
+
+  .game-container {
+    height: calc(100vh - 30px);
+    margin-top: 75px;
+  }
+
+  .capsule-container {
+    top: 30px;
+  }
+
+  .capsule-frame {
+    width: 400px;
+    height: 320px;
+  }
+
+  .capsule-image {
+    width: 370px;
+    height: 290px;
+  }
+
+  .seven-segment {
+    width: 48px;
+    height: 70px;
+  }
+
+  .segment {
+    stroke-width: 5;
+  }
+
+  .progress-container {
+    top: 420px;
+    width: 340px;
+  }
+
+  .progress-track {
+    height: 13px;
+  }
+
+  .progress-percentage {
+    font-size: 1.3rem;
+  }
+
+  .inputs-container {
+    bottom: 55px;
+    padding: 0 55px;
+    gap: 45px;
+  }
+
+  .input-frame {
+    min-width: 300px;
+    padding: 28px;
+  }
+
+  .input-label {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+  }
+
+  .code-input {
+    font-size: 1.2rem;
+    padding: 18px 24px;
+  }
+
+  .input-indicator {
+    width: 16px;
+    height: 16px;
+  }
+
+  .input-status {
+    font-size: 1.1rem;
+    margin-top: 12px;
+  }
+
+  .secret-phase-content {
+    max-width: 580px;
+    width: 80%;
+    padding: 40px;
+  }
+
+  .secret-phase-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+
+  .secret-input {
+    font-size: 1.5rem;
+    padding: 22px;
+  }
+
+  /* Câbles optimisés pour 1280x800 */
+  .cable-base,
+  .cable-shadow,
+  .cable-reflect,
+  .cable-active {
+    stroke-width: 18;
+  }
+
+  .cable-reflect {
+    stroke-width: 12;
+  }
+}
+
 @media (max-width: 1024px) {
   .title-main {
     font-size: 2.2rem;
