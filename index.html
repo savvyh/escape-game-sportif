@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ÉQUIPE EN MISSION</title>
+    <!-- Animate.css pour les animations -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- Google Fonts pour un style plus moderne -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Styles CSS -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Effet de particules de fond -->
+    <div class="particles-background" id="particlesBackground"></div>
+
+    <!-- Titre principal avec effet holographique -->
+    <div class="title-container">
+      <h1 class="title-main">MISSION : DÉSAMORÇER LA BOMBE</h1>
+      <div class="title-glow"></div>
+    </div>
+
+    <!-- Compte à rebours dramatique avec affichage 7 segments -->
+    <div class="countdown-container">
+      <div class="countdown-frame">
+        <div class="countdown-label">TEMPS RESTANT</div>
+        <div class="seven-segment-display">
+          <div class="digit-container">
+            <div class="seven-segment" id="hour1">
+              <div class="segment a"></div>
+              <div class="segment b"></div>
+              <div class="segment c"></div>
+              <div class="segment d"></div>
+              <div class="segment e"></div>
+              <div class="segment f"></div>
+              <div class="segment g"></div>
+            </div>
+            <div class="seven-segment" id="hour2">
+              <div class="segment a"></div>
+              <div class="segment b"></div>
+              <div class="segment c"></div>
+              <div class="segment d"></div>
+              <div class="segment e"></div>
+              <div class="segment f"></div>
+              <div class="segment g"></div>
+            </div>
+            <div class="separator">:</div>
+            <div class="seven-segment" id="min1">
+              <div class="segment a"></div>
+              <div class="segment b"></div>
+              <div class="segment c"></div>
+              <div class="segment d"></div>
+              <div class="segment e"></div>
+              <div class="segment f"></div>
+              <div class="segment g"></div>
+            </div>
+            <div class="seven-segment" id="min2">
+              <div class="segment a"></div>
+              <div class="segment b"></div>
+              <div class="segment c"></div>
+              <div class="segment d"></div>
+              <div class="segment e"></div>
+              <div class="segment f"></div>
+              <div class="segment g"></div>
+            </div>
+            <div class="separator">:</div>
+            <div class="seven-segment" id="sec1">
+              <div class="segment a"></div>
+              <div class="segment b"></div>
+              <div class="segment c"></div>
+              <div class="segment d"></div>
+              <div class="segment e"></div>
+              <div class="segment f"></div>
+              <div class="segment g"></div>
+            </div>
+            <div class="seven-segment" id="sec2">
+              <div class="segment a"></div>
+              <div class="segment b"></div>
+              <div class="segment c"></div>
+              <div class="segment d"></div>
+              <div class="segment e"></div>
+              <div class="segment f"></div>
+              <div class="segment g"></div>
+            </div>
+          </div>
+        </div>
+        <div class="countdown-unit">HH:MM:SS</div>
+      </div>
+    </div>
+
+    <!-- Container principal du jeu -->
+    <div class="game-container">
+      <!-- Capsule centrale avec l'image réelle -->
+      <div class="capsule-container">
+        <div class="capsule-frame">
+          <img
+            src="capsule-factice.png"
+            alt="Capsule à désamorcer"
+            class="capsule-image"
+            id="capsuleImage"
+          />
+          <div class="capsule-overlay" id="capsuleOverlay">
+            <div class="led-indicator led-red" id="ledRed"></div>
+            <div class="led-indicator led-green" id="ledGreen"></div>
+          </div>
+          <div class="capsule-glow" id="capsuleGlow"></div>
+        </div>
+      </div>
+
+      <!-- Système de fils connectés à la capsule -->
+      <div class="wires-system">
+        <!-- Fil 1 - Rouge -->
+        <div class="wire-container wire-1">
+          <svg class="wire-svg" viewBox="0 0 400 300">
+            <defs>
+              <linearGradient
+                id="wireGradient1"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #ff0000; stop-opacity: 0.3"
+                />
+                <stop
+                  offset="50%"
+                  style="stop-color: #ff4444; stop-opacity: 0.6"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #ff0000; stop-opacity: 0.3"
+                />
+              </linearGradient>
+              <filter id="wireGlow1">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <path
+              class="wire-base wire-1-base"
+              d="M 50 250 Q 100 200 150 150 Q 200 100 250 50 Q 300 20 350 10"
+              stroke="#333"
+              stroke-width="6"
+              fill="none"
+            />
+            <path
+              class="wire-active wire-1-active"
+              id="wire1Active"
+              d="M 50 250 Q 100 200 150 150 Q 200 100 250 50 Q 300 20 350 10"
+              stroke="url(#wireGradient1)"
+              stroke-width="8"
+              fill="none"
+              filter="url(#wireGlow1)"
+            />
+          </svg>
+        </div>
+
+        <!-- Fil 2 - Bleu -->
+        <div class="wire-container wire-2">
+          <svg class="wire-svg" viewBox="0 0 400 300">
+            <defs>
+              <linearGradient
+                id="wireGradient2"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #0066ff; stop-opacity: 0.3"
+                />
+                <stop
+                  offset="50%"
+                  style="stop-color: #4488ff; stop-opacity: 0.6"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #0066ff; stop-opacity: 0.3"
+                />
+              </linearGradient>
+              <filter id="wireGlow2">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <path
+              class="wire-base wire-2-base"
+              d="M 350 250 Q 300 200 250 150 Q 200 100 150 50 Q 100 20 50 10"
+              stroke="#333"
+              stroke-width="6"
+              fill="none"
+            />
+            <path
+              class="wire-active wire-2-active"
+              id="wire2Active"
+              d="M 350 250 Q 300 200 250 150 Q 200 100 150 50 Q 100 20 50 10"
+              stroke="url(#wireGradient2)"
+              stroke-width="8"
+              fill="none"
+              filter="url(#wireGlow2)"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Jauge de progression améliorée -->
+      <div class="progress-container">
+        <div class="progress-frame">
+          <div class="progress-label" id="progressLabel">PROGRESSION: 0%</div>
+          <div class="progress-track">
+            <div class="progress-bar" id="progressBar">
+              <div class="progress-shine"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zone de saisie des codes -->
+      <div class="inputs-container">
+        <div class="input-station input-1">
+          <div class="input-frame">
+            <div class="input-label">STATION DE DÉCODAGE 1</div>
+            <div class="input-field-container">
+              <input
+                type="text"
+                class="code-input"
+                id="input1"
+                placeholder="CODE D'ACCÈS"
+                maxlength="15"
+              />
+              <div class="input-indicator" id="input1Indicator"></div>
+            </div>
+            <div class="input-status" id="input1Status">EN ATTENTE</div>
+          </div>
+        </div>
+
+        <div class="input-station input-2">
+          <div class="input-frame">
+            <div class="input-label">STATION DE DÉCODAGE 2</div>
+            <div class="input-field-container">
+              <input
+                type="text"
+                class="code-input"
+                id="input2"
+                placeholder="CODE D'ACCÈS"
+                maxlength="15"
+              />
+              <div class="input-indicator" id="input2Indicator"></div>
+            </div>
+            <div class="input-status" id="input2Status">EN ATTENTE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages flottants améliorés -->
+      <div class="floating-message message-1" id="messageLeft">
+        <div class="message-content">
+          <div class="message-icon"></div>
+          <div class="message-text"></div>
+        </div>
+      </div>
+      <div class="floating-message message-2" id="messageRight">
+        <div class="message-content">
+          <div class="message-icon"></div>
+          <div class="message-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay pour l'animation finale -->
+    <div class="final-zoom-overlay" id="finalOverlay">
+      <div class="bomb-final" id="bombFinal">
+        <img
+          src="capsule-factice.png"
+          alt="Capsule désamorcée"
+          class="capsule-final-image"
+          id="capsuleFinalImage"
+        />
+        <div class="success-particles" id="particles"></div>
+        <!-- Fond sombre pour le texte -->
+        <div class="victory-overlay" id="victoryOverlay"></div>
+      </div>
+      <!-- Message de victoire -->
+      <div class="victory-message" id="victoryMessage">
+        <h1 class="victory-title">🎉 MISSION ACCOMPLIE ! 🎉</h1>
+        <p class="victory-subtitle">
+          La capsule a été désamorcée avec succès !
+        </p>
+      </div>
+    </div>
+
+    <!-- Étape secrète -->
+    <div class="secret-phase" id="secretPhase">
+      <h2>🔒 ÉTAPE SECRÈTE DÉTECTÉE 🔒</h2>
+      <p>
+        Les codes sont validés mais la capsule reste active !<br />
+        Un dernier mot secret doit être découvert ensemble...
+      </p>
+      <input
+        type="text"
+        class="secret-input"
+        id="secretInput"
+        placeholder="MOT SECRET"
+        maxlength="20"
+      />
+      <p class="mystery-text">
+        💡 Cherchez l'indice dans la nature qui vous entoure...
+      </p>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
